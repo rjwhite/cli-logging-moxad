@@ -1,0 +1,19 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cli_logging"
+version = "0.1.0"
+authors = [
+  { name="RJ White", email="rj.white@moxad.com" },
+]
+description = "Reusable colored logging setup for CLI scripts"
+classifiers = [
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Operating System :: POSIX :: Linux",
+    "Intended Audience :: Developers",
+    "Natural Language :: English"
+]
