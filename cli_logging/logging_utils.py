@@ -1,31 +1,15 @@
 import os
 import sys
-import logging
-import argparse
+try:
+    import logging
+    import argparse
+    import colorlog
+except ModuleNotFoundError as e:
+    prog = sys.argv[0]
+    sys.stderr.write(f"{prog}: error during import: {e}\n")
+    sys.exit(1)
 
-_VERSION = '0.3.0'
-
-# ANSI color codes
-COLORS = {
-    "DEBUG": "\033[36m",    # Cyan
-    "INFO": "\033[32m",     # Green
-    "WARNING": "\033[33m",  # Yellow
-    "ERROR": "\033[31m",    # Red
-    "CRITICAL": "\033[41m", # Red background
-    "RESET": "\033[0m",
-}
-
-
-class ColorFormatter(logging.Formatter):
-    def __init__(self, fmt=None, use_color=True):
-        super().__init__(fmt)
-        self.use_color = use_color
-
-    def format(self, record):
-        if self.use_color:
-            color = COLORS.get(record.levelname, COLORS["RESET"])
-            record.levelname = f"{color}{record.levelname}{COLORS['RESET']}"
-        return super().format(record)
+_VERSION = '0.4.0'
 
 
 class MaxLevelFilter(logging.Filter):
@@ -61,22 +45,40 @@ def setup_cli_logging(debug: bool = False, progname: str | None = None,
     root.setLevel(level)
     root.handlers.clear()
 
-    fmt = f"%(levelname)s: %(message)s"
-    if progname and progname != "":
-        fmt = f"{progname}: {fmt}"
+    base_fmt = "%(levelname)s: %(message)s"
+    if progname:
+        base_fmt = f"{progname}: {base_fmt}"
 
-    # stdout handler for DEBUG/INFO
+    # Build colored and plain formatters
+    def make_formatter(stream):
+        color_flag = stream.isatty() if use_color else False
+        if color_flag:
+            # %(log_color)s … %(reset)s will color the WHOLE line per level
+            fmt = f"%(log_color)s{base_fmt}%(reset)s"
+            return colorlog.ColoredFormatter(
+                fmt,
+                log_colors={
+                    'DEBUG':    'cyan',
+                    'INFO':     'green',
+                    'WARNING':  'yellow',
+                    'ERROR':    'red',
+                    'CRITICAL': 'bold_red',
+                },
+                style='%'   # we're using %-style formatting
+            )
+        else:
+            return logging.Formatter(base_fmt)
+
+    # stdout: DEBUG/INFO
     stdout_handler = logging.StreamHandler(sys.stdout)
     stdout_handler.setLevel(logging.DEBUG)
     stdout_handler.addFilter(MaxLevelFilter(logging.INFO))
-    color_flag = sys.stdout.isatty() if use_color == True else False
-    stdout_handler.setFormatter(ColorFormatter(fmt, color_flag))
+    stdout_handler.setFormatter(make_formatter(sys.stdout))
 
-    # stderr handler for WARNING+
+    # stderr: WARNING+
     stderr_handler = logging.StreamHandler(sys.stderr)
     stderr_handler.setLevel(logging.WARNING)
-    color_flag = sys.stderr.isatty() if use_color == True else False
-    stderr_handler.setFormatter(ColorFormatter(fmt, color_flag))
+    stderr_handler.setFormatter(make_formatter(sys.stderr))
 
     root.addHandler(stdout_handler)
     root.addHandler(stderr_handler)

@@ -18,7 +18,7 @@ install:
 	@if [ `whoami` = 'root' ]; then \
 		echo "DON'T run this as root!" ; \
 	else \
-		python3 -m pip install --user . ; \
+		python3 -m pip install . ; \
 	fi
 
 # When developing and debugging, use -e/--editable option to pip for install
@@ -26,7 +26,7 @@ install-dev:
 	@if [ `whoami` = 'root' ]; then \
 		echo "DON'T run this as root!" ; \
 	else \
-		python3 -m pip install --user --editable . ; \
+		python3 -m pip install --editable . ; \
 	fi
 
 build-dist:

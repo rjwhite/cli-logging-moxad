@@ -21,7 +21,7 @@
     testing/test.py:
         - added test program
 
-0.3.0   Aug 19, 2025
+0.3.0   Aug 19, 2025:
     Makefile:
         - improved.  added separate install-dev target.
     cli_logging/logging_utils.py:
@@ -33,3 +33,14 @@
         - updated to use new --nocolor option
     README.md, README.txt:
         - updated
+
+0.4.0   Aug 19, 2025:
+    cli_logging/logging_utils.py:
+        - rewrote setup_cli_logging() to use colorlog module to simplify
+          things, give us the ability to color the entire message instead
+          of just the message severity level, and get rid of he ugly
+          encompassing colored block around some levels, like CRITICAL.
+          Also, the colors are now given in English instead of ugly ANSI
+          color codes.
+          Does require installing colorlog module though.
+          Added try/except block for imports to catch missing modules.
