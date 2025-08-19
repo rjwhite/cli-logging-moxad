@@ -1,2 +1,21 @@
-Aug 18, 2025:
+0.1.0   Aug 18, 2025:
     original version 0.1.0
+
+0.2.0   Aug 19, 2025:
+    cli_logging/logging_utils.py:
+        - removed all the complexity for setting up handlers for printing
+          a subroutine utility name.  Too much complexity.
+        - It now tries to prepend a program-name if it is available.
+        - As for any sub-routine name you eant printed, if you want to
+          have one, prepend your message you send. eg:
+                logging.debug("function-name: my debug message")
+        - Now anything above INFO and DEBUG go to stderr. - otherwise stdout.
+        - Better comments.
+        - Added _VERSION
+    cli_logging/__init__.py:
+        - imports _VERSION
+    LICENSE, README.txt, README.md:
+        - added
+    pyproject.toml:
+        - added:  readme = "README.md"
+

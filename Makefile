@@ -14,10 +14,12 @@ help:
 	@echo use "'make build-dist'" to build package from source
 	@echo use "'make uninstall'" to uninstall package
 
+# When developing and debugging, use -e option to pip for install
 install:
 	@if [ `whoami` = 'root' ]; then \
 		echo "DON'T run this as root!" ; \
 	else \
+		# python3 -m pip -e install . ; \
 		python3 -m pip install . ; \
 	fi
 
@@ -26,7 +28,7 @@ build-dist:
 	python3 -m build
 
 test:
-	python3 run-tests.py
+	python3 testing/test.py --debug
 
 clean:
 	rm -f cli_logging.pyc

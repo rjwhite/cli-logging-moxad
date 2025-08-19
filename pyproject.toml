@@ -4,11 +4,12 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cli_logging"
-version = "0.1.0"
+version = "0.2.0"
 authors = [
   { name="RJ White", email="rj.white@moxad.com" },
 ]
 description = "Reusable colored logging setup for CLI scripts"
+readme = "README.md"
 classifiers = [
     "Programming Language :: Python",
     "Programming Language :: Python :: 3",
