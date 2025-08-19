@@ -18,4 +18,18 @@
         - added
     pyproject.toml:
         - added:  readme = "README.md"
+    testing/test.py:
+        - added test program
 
+0.3.0   Aug 19, 2025
+    Makefile:
+        - improved.  added separate install-dev target.
+    cli_logging/logging_utils.py:
+        - added new optional 3rd argument to setup_cli_logging()
+          use_color that defaults to True
+        - __main__ checks for --nocolor option and passes that on
+          to setup_cli_logging()
+    testing/test.py
+        - updated to use new --nocolor option
+    README.md, README.txt:
+        - updated
