@@ -7,7 +7,7 @@ levels such as DEBUG, INFO, WARNING, ERROR and CRITICAL.
 
 The messages are high-lighted with different colors if they are
 going to a terminal.  If output has been redirected to a file,
-then the colors are turned off.  You can also spefic to not use
+then the colors are turned off.  You can also specify to not use
 colors at all.
 
 Levels DEBUG and INFO go to stdout, while WARNING, ERROR and CRITICAL
@@ -19,7 +19,7 @@ debug is set to True.
 The second argument (progname) is an optional program name to be printed
 at the beginning of the message provided.
 
-The thrid argument (use_color) is an optional program name to control
+The third argument (use_color) is an optional program name to control
 whether to use color on the message level or not.  default is True.
 
 Code example
@@ -28,14 +28,14 @@ Code example
     import sys
     import argparse
     import logging
-    from cli_logging import setup_cli_logging
+    from cli_logging_moxad import setup_cli_logging
 
     # check for options --debug and --nocolor
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true", 
+    parser.add_argument("-d", "--debug", action="store_true", 
                         help="Enable debug logging")
-    parser.add_argument("--nocolor", action="store_false", 
-                        help="Enable debug logging")
+    parser.add_argument("-n", "--nocolor", action="store_false", 
+                        help="Disable color output")
     args = parser.parse_args()
 
     setup_cli_logging(debug=args.debug,

@@ -2,14 +2,14 @@ import os
 import sys
 import argparse
 import logging
-from cli_logging import setup_cli_logging
+from cli_logging_moxad import setup_cli_logging
 
 # check for options --debug and --nocolor
 parser = argparse.ArgumentParser()
-parser.add_argument("--debug", action="store_true", 
+parser.add_argument("-d", "--debug", action="store_true", 
                     help="Enable debug logging")
-parser.add_argument("--nocolor", action="store_false", 
-                    help="Enable debug logging")
+parser.add_argument("-n", "--nocolor", action="store_false", 
+                    help="disable color output")
 args = parser.parse_args()
 
 setup_cli_logging(debug=args.debug,

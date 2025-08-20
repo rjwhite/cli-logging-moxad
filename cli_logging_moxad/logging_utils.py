@@ -9,7 +9,7 @@ except ModuleNotFoundError as e:
     sys.stderr.write(f"{prog}: error during import: {e}\n")
     sys.exit(1)
 
-_VERSION = '0.4.0'
+_VERSION = '0.5.0'
 
 
 class MaxLevelFilter(logging.Filter):
@@ -86,10 +86,10 @@ def setup_cli_logging(debug: bool = False, progname: str | None = None,
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--debug", action="store_true", 
+    parser.add_argument("-d", "--debug", action="store_true", 
                         help="Enable debug logging")
-    parser.add_argument("--nocolor", action="store_false", 
-                        help="Enable debug logging")
+    parser.add_argument("-n", "--nocolor", action="store_false", 
+                        help="disable color output")
     args = parser.parse_args()
 
     setup_cli_logging(debug=args.debug,
