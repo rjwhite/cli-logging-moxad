@@ -63,3 +63,9 @@
         - changed import from cli_logging to cli_logging_moxad
     RELEASE-NOTES:
         - fixed typos
+
+0.6.0   Aug 21, 2025:
+    requirements.txt:
+        - created
+    pyproject.py:
+        - added dependencies section
