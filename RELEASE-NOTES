@@ -69,3 +69,9 @@
         - created
     pyproject.py:
         - added dependencies section
+
+0.7.0   Aug 21, 2025:
+    README.md, README.txt:
+        - improved wording
+    pyproject.py:
+        - improved description

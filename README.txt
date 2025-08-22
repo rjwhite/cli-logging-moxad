@@ -2,11 +2,11 @@ write out messages with various levels:  INFO, ERROR, etc...
 
 Description
 ===========
-This module gives you a routine to write out a message of various
-levels such as DEBUG, INFO, WARNING, ERROR and CRITICAL.
 
+This module provides a routine to write out a message of various
+levels such as DEBUG, INFO, WARNING, ERROR and CRITICAL.
 The messages are high-lighted with different colors if they are
-going to a terminal.  If output has been redirected to a file,
+going to a terminal.  If the output has been redirected to a file,
 then the colors are turned off.  You can also specify to not use
 colors at all.
 
@@ -24,6 +24,7 @@ whether to use color on the message level or not.  default is True.
 
 Code example
 ============
+
     import os
     import sys
     import argparse
